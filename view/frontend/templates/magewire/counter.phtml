@@ -1,0 +1,12 @@
+<?php declare(strict_types=1);
+
+use Yireo\MagewireExamples\Magewire\Counter;
+
+/** @var Counter $magewire */
+?>
+<div>
+    Counter: <?= $magewire->counter; ?>
+
+    <button wire:click="increment">Increment</button>
+    <button wire:click="decrement">Decrement</button>
+</div>

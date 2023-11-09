@@ -7,7 +7,7 @@ use YireoTraining\MagewireCounter\Magewire\Counter;
 <div style="position:absolute; z-index:100">
     Counter: <?= $magewire->counter; ?>
 
-    <input type="number" wire:model="counter"/>
+    <input type="number" wire:model="counter" value="<?= $magewire->counter ?>"/>
     <button wire:click="increment">Increment</button>
     <button wire:click="decrement">Decrement</button>
 </div>

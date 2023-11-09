@@ -2,33 +2,39 @@
 
 namespace YireoTraining\MagewireCounter\Magewire;
 
-use Magento\Customer\Model\Session;
+use Magento\Customer\Model\Session as CustomerSession;
 use Magewirephp\Magewire\Component;
 
 class Counter extends Component
 {
     public function __construct(
-        private Session $session
+        private CustomerSession $customerSession
     ) {
     }
 
-    public int $counter = 0;
+    public $counter = 0;
 
-    public function mount(): void
+    public function boot(): void
     {
-        $this->counter = (int)$this->session->getData('counter');
+        $this->counter = (int)$this->customerSession->getData('counter');
+    }
+
+    public function updatedCounter(string $value)
+    {
+        $this->customerSession->setCounter((int) $value);
+        return $value;
     }
 
     public function increment()
     {
         $this->counter++;
-        $this->session->setData('counter', $this->counter);
+        $this->customerSession->setCounter($this->counter);
         $this->dispatchSuccessMessage(__('Counter is now '.$this->counter));
     }
 
     public function decrement()
     {
         $this->counter--;
-        $this->session->setData('counter', $this->counter);
+        $this->customerSession->setCounter($this->counter);
     }
 }
